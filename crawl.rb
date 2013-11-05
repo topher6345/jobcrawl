@@ -1,61 +1,73 @@
 require 'nokogiri'
 require 'open-uri'
 
+jobkeywordspattern = /\s*ruby\s*|\s*software\s*|\s*engineer\s*|\s*coding\s*|\s*developer\s*|\s*web\s*|\s*programmer\s*|\s*iOS\s*|\s*wordpress\s*|\s*music\s*|\s*guitar\s*/i
 
-site = 'http://sfbay.craigslist.org/sof/'
+companiespattern = /companies/i
+cleanpattern = /\/Jobs\/(.*)\.aspx/i
+locationpattern = /\s*CA\b|\s*San Francisco\s*|\s*San Jose\s*|\s*San Carlos\s*|\s*Santa Clara\s*|\s*Mountain View\s*/i
 
-doc = Nokogiri::HTML(open(site))
+site = 'http://www.startuply.com'
+# For the first 10 pages
+puts "<h3>" + site + "</h3>"
+puts "<table border=3px>"
+puts "<thead><tr><th>Location</th><th>Position</th><th>Company</th></thead>"
 
-doc.css('p').css('a').each do |link|	
-	puts "<a href='" + "http://sfbay.craigslist.org" + link.attributes["href"].value + "'>" 
-	puts  link.content
-	puts  "</a><br />"
+i = 1
+while i < 3 do
+
+	site_options = site + '/Default.aspx?p=' + i.to_s 
+	doc = Nokogiri::HTML(open(site_options))
+	
+	j = 0 
+	# For every link in the td tag
+	while j < doc.css('td a').size do 
+		if (doc.css('td a')[3 + j * 4])
+			company  = doc.css('td a')[0 + j * 4]
+			job      = doc.css('td a')[1 + j * 4]
+			location = doc.css('td a')[3 + j * 4]
+				#location 
+				if locationpattern.match(location.children.text).to_s.empty?
+					# puts "skip:" + location.children.text + "<br />"
+
+				else 
+					# puts "match:" + location.children.text + "<br />"
+					if jobkeywordspattern.match(job.children.text).to_s.empty?
+						# puts "&nbsp;&nbsp;&nbsp;&nbsp;skip:" + job.children.text + "<br />"
+					else
+						# puts "&nbsp;&nbsp;&nbsp;&nbsp;match:<strong>" + job.children.text + "</strong><br />"
+					   puts "<tr>"
+					   puts "<td>" + location.children.text + "</td>"
+					   puts "<td><a href='" + site + job.attributes["href"].value + "'>" + job.children.text + "</a></td>"
+					   puts "<td><a href='" + site + company.attributes["href"].value + "'>" + company.children.text + "</a></td>"
+								puts "</tr>"
+					end
+				end
+			# puts doc.css('td a')[0 + j * 4].children.text + "<br />"
+			# puts doc.css('td a')[1 + j * 4].children.text + "<br />"
+			# puts doc.css('td a')[3 + j * 4].children.text + "<br />"
+		end 
+		j = j + 1
+		break if (3 + j * 1) > doc.css('td a').size
+	end
+i = i + 1
 end
+puts "</table>"
 
 
-
-
-
-
-# site = 'http://www.startuply.com'
-
-# pattern = /.*ruby.*|.*developer.*|.*web.*|.*programmer.*|.*iOS.*|.*wordpress.*/i
-# companiespattern = /companies/i
-# cleanpattern = /\/Jobs\/(.*)\.aspx/i
-# locationpattern = /CA|San Fransisco|San Jose|/i
-
-# i = 1
-
-# # For the first 10 pages
-# while i < 10 do
-
-# 	puts i.to_s + "<br />"
-# 	site_options = site + '/Default.aspx?p=' + i.to_s 
-
-# 	doc = Nokogiri::HTML(open(site_options))
-
-# 	# For each anchor tag in the table
-# 	doc.css('td a').each do |link|
-
-# 		# Filter out all the companies
-# 		if companiespattern.match(link.attributes["href"].value).to_s.empty? 
-
-# 			# Get location 
-# 			if link.attributes["href"].value != "javascript:;"
-# 				if pattern.match(link.attributes["href"].value).to_s.empty?
-# 				else
-# 					mymatch = cleanpattern.match(link.attributes["href"].value)
-# 					puts "<a href='" 
-# 					puts  site 
-# 					puts  link.attributes["href"].value 
-# 					puts  "'>" 
-# 					puts  mymatch[1] 
-# 					puts  "</a><br />"
-# 				end
-# 			end
-# 		end
+# site = 'http://sfbay.craigslist.org/sof/'
+# doc = Nokogiri::HTML(open(site))
+# doc.css('p').css('a').each do |link|
+# 	if pattern.match(link.content)	
+# 		puts "<a href='" + "http://sfbay.craigslist.org" + link.attributes["href"].value + "'>" 
+# 		puts  link.content
+# 		puts  "</a><br />"
 # 	end
-# i = i + 1
 # end
+
+
+
+
+
 
 
