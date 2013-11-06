@@ -6,8 +6,10 @@ locationpattern = /\s*CA\b|\s*San Francisco\s*|\s*San Jose\s*|\s*San Carlos\s*|\
 
 site = 'http://www.startuply.com'
 
-puts "<h3>" + site + "</h3>"
-puts "<table border=3px>"
+puts "<div class='panel panel-default'>"
+puts  "<div class='panel-heading'><h3>" + site + "</h3></div>"
+
+puts "<table border=3px class='table'>"
 puts "<thead><tr><th>Location</th><th>Position</th><th>Company</th></thead>"
 
 i = 1

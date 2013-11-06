@@ -3,8 +3,11 @@ site = "http://www.indeed.com/jobs?q=%28iOS+or+Wordpress+or+Web+or+Ruby+or+Music
 
 doc = Nokogiri::HTML(open(site))
 
-puts "<h3>" + s + "</h3>"
-puts "<table border=3px>"
+puts "<div class='panel panel-default'>"
+puts  "<div class='panel-heading'><h3>" + s + "</h3></div>"
+
+
+puts "<table border=3px class='table'>"
 puts "<thead><tr><th>Location</th><th>Position</th><th>Company</th></thead>"
 
 doc.css('#resultsCol').css(".row").each do |post|
