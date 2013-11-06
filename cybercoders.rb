@@ -20,7 +20,7 @@ s = "http://www.cybercoders.com/search/?page=" + i.to_s + "&searchterms=ruby%20O
 					puts link.css(".job-details-container").css(".details").css(".location").first.children.text
 				puts "</td>"
 				puts "<td>"
-					puts "<a href='" + s
+					puts "<a href='" + site
 					puts link.css(".job-details-container").css(".job-title").css("a").first.attributes["href"].value
 					puts "'>"
 					puts link.css(".job-details-container").css(".job-title").css("a").text
