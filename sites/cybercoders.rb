@@ -7,7 +7,7 @@ puts "<table border=3px class='table'>"
 puts "<thead><tr><th>Location</th><th>Position</th></thead>"
 i = 1
 
-while i < 10 
+while i < 2 
 s = "http://www.cybercoders.com/search/?page=" + i.to_s + "&searchterms=ruby%20OR%20music%20OR%20guitar&searchlocation=95073&newsearch=true&sorttype="
 
 		doc = Nokogiri::HTML(open(s))

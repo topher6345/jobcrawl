@@ -11,10 +11,10 @@ puts "<body>"
 time = Time.new
 puts "<h1>" + time.strftime("%a %d %B %Y %I:%M %p") + "</h1>"
 
-require './cybercoders.rb'
-require './startuply.rb'
-require './indeed.rb'
-require './simplyhired.rb'
+require './sites/cybercoders.rb'
+require './sites/startuply.rb'
+require './sites/indeed.rb'
+require './sites/simplyhired.rb'
 
 puts "</body>"
 puts "</html>"

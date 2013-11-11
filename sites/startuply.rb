@@ -13,7 +13,7 @@ puts "<table border=3px class='table'>"
 puts "<thead><tr><th>Location</th><th>Position</th><th>Company</th></thead>"
 
 i = 1
-while i < 15 do
+while i < 10 do
 
 	site_options = site + '/Default.aspx?p=' + i.to_s 
 	doc = Nokogiri::HTML(open(site_options))
