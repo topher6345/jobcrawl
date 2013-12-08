@@ -15,6 +15,7 @@ require './sites/cybercoders.rb'
 require './sites/startuply.rb'
 require './sites/indeed.rb'
 require './sites/simplyhired.rb'
+require './sites/santacruzjobs.rb'
 
 puts "</body>"
 puts "</html>"
