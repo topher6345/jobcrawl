@@ -1,4 +1,4 @@
-ruby crawl.rb > links.html
+ruby main.rb > index.html
 
-open links.html
+open index.html
 

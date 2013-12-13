@@ -8,7 +8,7 @@ puts "<table border=3px class='table'>"
 puts "<thead><tr><th>Location</th><th>Position</th><th>Company</th></thead>"
 
 while i < 2 do
-	site = "http://www.simplyhired.com/search?q=web&l=santa-cruz%2C+ca&pn=" + i.to_s
+site = "http://www.simplyhired.com/search?q=web&l=santa-cruz%2C+ca&pn=" + i.to_s
  doc = Nokogiri::HTML(open(site))
 
 	doc.css("#jobs").css(".result").each do |link|

@@ -6,7 +6,6 @@ doc = Nokogiri::HTML(open(site))
 puts "<div class='panel panel-default'>"
 puts  "<div class='panel-heading'><h3>" + s + "</h3></div>"
 
-
 puts "<table border=3px class='table'>"
 puts "<thead><tr><th>Location</th><th>Position</th><th>Company</th></thead>"
 
